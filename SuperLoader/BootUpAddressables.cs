@@ -13,6 +13,17 @@ public static class AddressableLoader
         });
     }
     
+    
+    public static IEnumerator InitCreate<T>(string assetLabel, List<T> assets) where T : Object
+    {
+        yield return Addressables.LoadAssetsAsync<T>(assetLabel, op =>
+        {
+            assets.Add(GameObject.Instantiate(op));
+        });
+    }
+    
+    
+    
     public static IEnumerator InitCreateDeactivate<T>(string assetLabel, List<T> assets) where T : Object
     {
         yield return  Addressables.LoadAssetsAsync<T>(assetLabel, op =>
